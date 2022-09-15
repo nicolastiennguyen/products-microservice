@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const pool = require('./connection');
+// const pool = require('./connection');
 const { postProducts, getProducts } = require('./controllers');
 
 app.use(express.json());
 
 app.get('/products', getProducts)
-app.post('/products', postProducts)
+
+// app.post('/products', postProducts)
 
 
 app.listen(process.env.PORT, () => {
