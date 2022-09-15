@@ -3,7 +3,7 @@ const { writeProducts, readProducts } = require('./models')
 
 module.exports = {
   getProducts: (req, res) => {
-    console.log(req.query)
+    console.log(req.body)
   },
 
   postProducts: (req, res) => {
