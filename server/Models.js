@@ -2,6 +2,9 @@ const pool = require("./connection");
 
 module.exports = {
   readProducts: () => {
-    console.log('hi')
+  },
+
+  writeProducts: () => {
+
   }
 }
