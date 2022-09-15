@@ -6,5 +6,5 @@ fs.createReadStream('./.csv/product.csv')
   .pipe(csv())
   .on('data', (data) => res.push(data))
   .on('end', () => {
-    console.log(results.slice(0, 5));
+    console.log(res.slice(0, 5));
   })
