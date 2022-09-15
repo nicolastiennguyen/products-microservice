@@ -1,16 +1,27 @@
+require('dotenv').config();
 const express = require('express');
-// const pool = require("./databases/product.db/product.db.js")
-const router = require('./routes/product.routes')
-//add middleware
-//consider nodemon
-
 const app = express();
-const port = 3000; //add to .env later
+const router = require('./routes')
 
 app.use(express.json())
 
-// =============== PRODUCTS ROUTES ===============
+
 app.use('/products', router)
+
+
+app.listen(process.env.PORT, () => {
+  console.log(`Listening at port: ${process.env.PORT}`)
+});
+
+
+
+
+
+
+
+
+
+
 // app.post("/products", async(req, res) => {
 //   try {
 //     const { name, slogan, description, category} = req.body;
@@ -31,7 +42,3 @@ app.use('/products', router)
 //     console.error(err.message);
 //   }
 // })
-
-app.listen(port, () => [
-  console.log(`WW server listening on port ${port}`)
-])

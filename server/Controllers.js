@@ -1,7 +1,7 @@
-const {readProducts} = require('../models/product.model')
+const {readProducts} = require('./models')
 
 module.exports = {
   getProducts: (req, res) => {
-    readProducts()
+    console.log(req)
   },
 }
