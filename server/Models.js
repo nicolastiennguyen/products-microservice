@@ -18,7 +18,24 @@ module.exports = {
       })
   },
 
-  // returns a product's related IDs
+  // returns a product's style information
+  readStyle: (product_id) => {
+    return pool.connect()
+      .then(client => {
+        const query = `SELECT name, sale_price, original_price, default_style FROM styles WHERE id = $1`
+        return client.query(query, [product_id])
+          .then(res => {
+            client.release()
+            console.log(res.rows[0])
+          })
+          .catch(err => {
+            client.release()
+            console.log(err.stack)
+          })
+      })
+  },
+
+  // returns a product's related product IDs
   readRelated: (product_id) => {
     return pool.connect()
       .then(client => {

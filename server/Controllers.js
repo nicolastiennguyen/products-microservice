@@ -1,4 +1,4 @@
-const { readProduct, readRelated } = require('./models')
+const { readProduct, readStyle, readRelated } = require('./models')
 
 module.exports = {
   getProduct: (req, res) => {
@@ -9,6 +9,11 @@ module.exports = {
         console.error(err)
         res.sendStatus(500)
       })
+  },
+
+  getStyle: (req, res) => {
+    const { product_id } = req.params;
+    readStyle(product_id)
   },
 
   getRelated: (req, res) => {
