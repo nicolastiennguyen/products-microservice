@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
 require('dotenv').config();
 const { getProducts } = require('./controllers');
 const router = require('./routes');
 
+// app.use(morgan('dev'));
 app.use(express.json());
+
 
 app.use('/products', router);
 

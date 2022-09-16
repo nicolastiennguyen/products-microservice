@@ -1,33 +1,13 @@
-const { readProducts } = require('./models')
-const pool = require("./connection");
-
-pool.connect();
+const { readProduct } = require('./models')
 
 module.exports = {
-  // getProducts: (req, res) => {
-  //   console.log(req.body)
-  // },
-  getProducts: (req, res) => {
-    console.log('got to controllers')
-    pool.query('SELECT name FROM products')
-      .then(result => console.log(result))
-    // pool.connect()
-    // .then(client => {
-    //   return client
-    //   .query("SELECT name FROM products WHERE ID=1")
-    //   .then(res => {
-    //     client.release()
-    //     console.log(res)
-    //   })
-    //   .catch(err => {
-    //     client.release()
-    //     console.log(err.stack)
-    //   })
-    // })
-
+  getProduct: (req, res) => {
+    const { product_id } = req.params;
+    readProduct(product_id)
+      .then(results => res.json(results))
+      .catch(error => {
+        console.error(err);
+        res.sendStatus(500);
+      })
   },
-
-  postProducts: (req, res) => {
-    console.log(req.body)
-  }
 }
