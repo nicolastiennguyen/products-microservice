@@ -1,13 +1,11 @@
 const pool = require("./connection");
 
-// pool.connect();
-
 module.exports = {
   readProduct: (product_id) => {
-    pool.connect()
+    return pool.connect()
       .then(client => {
-          const query = `SELECT name FROM products WHERE products.id = $1`
-          client.query(query, [product_id])
+          const query = `SELECT name FROM products WHERE id = $1`;
+          return client.query(query, [product_id])
             .then(res => {
               client.release()
               console.log(res.rows[0])
@@ -16,22 +14,22 @@ module.exports = {
               client.release()
               console.log(err.stack)
             })
-    })
+      })
   },
+
+  readRelated: (product_id) => {
+    return pool.connect()
+      .then(client => {
+        const query = `SELECT ARRAY_AGG (related.related_product_id) FROM related WHERE related.current_product_id = $1`
+        return client.query(query, [product_id])
+          .then(res => {
+            client.release()
+            console.log(res.rows[0].array_agg)
+          })
+          .catch(err => {
+            client.release()
+            console.log(err.stack)
+          })
+      })
+  }
 }
-
-
-
-
-// module.exports = {
-//   getProducts: (req, res) => {
-//     console.log('got to controllers')
-//     pool.query('SELECT name FROM products')
-//       .then(result => console.log(result))
-
-//   },
-
-//   postProducts: (req, res) => {
-//     console.log(req.body)
-//   }
-// }
