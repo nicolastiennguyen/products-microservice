@@ -29,5 +29,8 @@
     "node": "^18.9.0",
     "nodemon": "^2.0.19",
     "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
   }
 }
