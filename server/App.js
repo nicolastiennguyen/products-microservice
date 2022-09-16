@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-// const pool = require('./connection');
-const { postProducts, getProducts } = require('./controllers');
+const { getProducts } = require('./controllers');
+const router = require('./routes');
 
 app.use(express.json());
 
-app.get('/products', getProducts)
+app.use('/products', router);
 
+// app.get('/products', getProducts)
 // app.post('/products', postProducts)
 
 

@@ -1,4 +1,4 @@
-const { writeProducts, readProducts } = require('./models')
+const { readProducts } = require('./models')
 const pool = require("./connection");
 
 pool.connect();
@@ -9,7 +9,7 @@ module.exports = {
   // },
   getProducts: (req, res) => {
     console.log('got to controllers')
-    pool.query('SELECT name FROM products WHERE ID=1')
+    pool.query('SELECT name FROM products')
       .then(result => console.log(result))
     // pool.connect()
     // .then(client => {
