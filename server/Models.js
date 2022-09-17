@@ -4,8 +4,33 @@ module.exports = {
   // returns a product's information
   readProduct: (product_id) => {
     return pool.connect().then((client) => {
-      // const query = `SELECT name, slogan, description, category, default_price FROM products WHERE id = $1`;
-      const query = ``;
+      const query = `
+      SELECT
+      json_build_object(
+        'name', products.name,
+        'slogan', products.slogan,
+        'description', products.description,
+        'category', products.category,
+        'default_price', products.default_price,
+        'features', (
+          SELECT
+          ARRAY_AGG(f)
+          FROM (
+            SELECT
+            json_build_object(
+              'feature', features.feature,
+              'value', features.value
+            )
+            AS f
+            FROM features
+            WHERE features.product_id=$1
+          )
+        as f)
+        )
+        as prod
+        FROM products
+        WHERE products.id = $1`;
+
       return client
         .query(query, [product_id])
         .then((res) => {
