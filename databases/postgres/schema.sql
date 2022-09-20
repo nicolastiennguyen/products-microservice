@@ -44,9 +44,9 @@ CREATE TABLE styles (
 id SERIAL PRIMARY KEY,
 productId INTEGER NOT NULL,
 name VARCHAR(100) NOT NULL,
-sale_price TEXT,
-original_price INTEGER NOT NULL,
-default_style INTEGER NOT NULL
+sale_price VARCHAR(10),
+original_price VARCHAR(10),
+default_style TEXT NOT NULL
 );
 
 
@@ -56,4 +56,6 @@ COPY photos FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/phot
 COPY products FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/product.csv' DELIMITER ',' CSV HEADER;
 COPY related FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/related.csv' DELIMITER ',' CSV HEADER;
 COPY sku FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/skus.csv' DELIMITER ',' CSV HEADER;
-COPY styles FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/styles.csv' DELIMITER ',' CSV HEADER;
+COPY styles FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/styles.csv' DELIMITER ',' NULL as 'null' CSV HEADER;
+
+ALTER TABLE styles ALTER COLUMN default_style TYPE BOOL using default_style::TEXT::BOOL;
