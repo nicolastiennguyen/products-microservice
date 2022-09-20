@@ -24,12 +24,12 @@ module.exports = {
   readProduct: (product_id) => {
     return pool.connect().then((client) => {
       const query = `
-      SELECT json_build_object( 'name', products.name, 'slogan', products.slogan, 'description', products.description, 'category', products.category, 'default_price', products.default_price, 'features',
+      SELECT json_build_object('id', products.id, 'name', products.name, 'slogan', products.slogan, 'description', products.description, 'category', products.category, 'default_price', products.default_price, 'features',
         (SELECT ARRAY_AGG(f)
         FROM
           (SELECT json_build_object( 'feature', features.feature, 'value', features.value ) AS f
           FROM features
-          WHERE features.product_id=$1 ) AS f) ) AS information
+          WHERE features.product_id=$1 ) AS f) ) AS results
         FROM products
       WHERE products.id = $1 `;
 
@@ -37,7 +37,7 @@ module.exports = {
         .query(query, [product_id])
         .then((res) => {
           client.release();
-          return res.rows[0];
+          return res.rows[0].results;
         })
         .catch((err) => {
           client.release();
@@ -61,17 +61,17 @@ module.exports = {
             (SELECT json_object_agg(sku.id,
          json_build_object( 'quantity', sku.quantity, 'size', sku.size ))
             FROM sku
-            WHERE sku.styleId = styles.id ) ) ) AS information
+            WHERE sku.styleId = styles.id ) ) ) AS results
             FROM styles
             WHERE productId = $1 )
-          FROM styles
-        WHERE productId = $1
+          FROM products
+        WHERE id = $1
       `;
       return client
         .query(query, [product_id])
         .then((res) => {
           client.release();
-          return res.rows;
+          return res.rows[0];
         })
         .catch((err) => {
           client.release();
