@@ -59,3 +59,9 @@ COPY sku FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/skus.cs
 COPY styles FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/styles.csv' DELIMITER ',' NULL as 'null' CSV HEADER;
 
 ALTER TABLE styles ALTER COLUMN default_style TYPE BOOL using default_style::TEXT::BOOL;
+
+CREATE INDEX features_index ON features(product_id);
+CREATE INDEX photos_index ON photos(styleId);
+CREATE INDEX related_index ON related(current_product_id);
+CREATE INDEX sku_index ON sku(styleId);
+CREATE INDEX styles_index ON styles(productId);
