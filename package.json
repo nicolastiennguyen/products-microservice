@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "csv": "psql postgres -U nicolasnguyen -f databases/postgres/schema.sql",
+    "csv": "psql postgres -U nicolasnguyen -f database/schema.sql",
     "server": "npx nodemon --watch server server/app.js",
     "test": "k6 run tests/script.js"
   },
