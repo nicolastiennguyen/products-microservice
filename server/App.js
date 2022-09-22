@@ -12,6 +12,7 @@ app.use(express.json());
 
 
 app.use('/products', router);
+app.get(process.env.LOADERIO_TOKEN, (req, res) => res.send(process.env.LOADERIO_TOKEN));
 
 
 app.listen(process.env.PORT, () => {
