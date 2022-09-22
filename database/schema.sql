@@ -51,12 +51,12 @@ default_style TEXT NOT NULL
 
 
 
-COPY features FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/features.csv' DELIMITER ',' CSV HEADER;
-COPY photos FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/photos.csv' DELIMITER ',' CSV HEADER;
-COPY products FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/product.csv' DELIMITER ',' CSV HEADER;
-COPY related FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/related.csv' DELIMITER ',' CSV HEADER;
-COPY sku FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/skus.csv' DELIMITER ',' CSV HEADER;
-COPY styles FROM '/Users/nicolasnguyen/hackreactor2207/products-server/.csv/styles.csv' DELIMITER ',' NULL as 'null' CSV HEADER;
+COPY features FROM '/Users/nicolasnguyen/hackreactor2207/products-server/etc/features.csv' DELIMITER ',' CSV HEADER;
+COPY photos FROM '/Users/nicolasnguyen/hackreactor2207/products-server/etc/photos.csv' DELIMITER ',' CSV HEADER;
+COPY products FROM '/Users/nicolasnguyen/hackreactor2207/products-server/etc/product.csv' DELIMITER ',' CSV HEADER;
+COPY related FROM '/Users/nicolasnguyen/hackreactor2207/products-server/etc/related.csv' DELIMITER ',' CSV HEADER;
+COPY sku FROM '/Users/nicolasnguyen/hackreactor2207/products-server/etc/skus.csv' DELIMITER ',' CSV HEADER;
+COPY styles FROM '/Users/nicolasnguyen/hackreactor2207/products-server/etc/styles.csv' DELIMITER ',' NULL as 'null' CSV HEADER;
 
 ALTER TABLE styles ALTER COLUMN default_style TYPE BOOL using default_style::TEXT::BOOL;
 
