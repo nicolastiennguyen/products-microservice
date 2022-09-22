@@ -1,8 +1,8 @@
 -- DROP DATABASE IF EXISTS products
 
-CREATE DATABASE products;
+-- CREATE DATABASE products;
 
-\c products
+-- \c products
 
 CREATE TABLE features (
 id SERIAL PRIMARY KEY,
